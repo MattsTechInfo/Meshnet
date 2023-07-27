@@ -1,0 +1,25 @@
+#!/usr/bin/with-contenv bash
+
+# Do nothing if NordVPN isn't available
+while [ ! -S /run/nordvpn/nordvpnd.sock ] ; do
+  sleep 1
+done
+
+# Set the token from file if ENV is not set
+[[ -z "${NORDVPN_TOKEN}" ]] && [[ -f "${NORDVPN_TOKENFILE}" ]] && NORDVPN_TOKEN="$(head -n 1 "${NORDVPN_TOKENFILE}")"
+
+# Make sure the token isn't destroyed on logout
+nordvpn logout --persist-token > /dev/null
+
+# Login with token
+if [[ -n ${NORDVPN_TOKEN} ]]; then
+  nordvpn login --token "${NORDVPN_TOKEN}" || {
+    echo "Invalid token."
+    exit 1
+  }
+else
+  echo "No token set."
+  exit 1
+fi
+
+exit 0

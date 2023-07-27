@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm -rf /run/nordvpn
+ip link delete nordlynx 2>/dev/null

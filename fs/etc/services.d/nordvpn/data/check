@@ -1,0 +1,4 @@
+#!/bin/bash
+
+[ -S /run/nordvpn/nordvpnd.sock ] && exit 0
+exit 1

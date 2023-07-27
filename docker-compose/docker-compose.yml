@@ -1,0 +1,10 @@
+version: "3"
+services:
+  meshnet:
+    image: ghcr.io/mattstechinfo/meshnet:v1.0
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    env_file: .env
+    hostname: meshnet    # Make sure hostname is set! Without it, every restart will add a new peer to your Meshnet.

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Set permissions to executable
+chmod +x /usr/bin/nordvpn_login
+chmod +x /usr/bin/meshnet_config
+chmod +x /usr/bin/meshnet_watch
+chmod +x /etc/services.d/nordvpn/data/check
+echo "Executable permissions set."

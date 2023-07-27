@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Prepare the tunnel interface
+mkdir -p /dev/net
+[[ -c /dev/net/tun ]] || mknod -m 0666 /dev/net/tun c 10 200

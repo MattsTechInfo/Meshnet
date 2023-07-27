@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ ! -d /run/nordvpn ]]; then
+  mkdir -m 0770 /run/nordvpn
+fi
+
+exec s6-notifyoncheck -n 60 -d /usr/sbin/nordvpnd > /dev/null

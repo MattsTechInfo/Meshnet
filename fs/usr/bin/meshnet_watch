@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Spin up connection check to verify if Meshnet is running
+while true; do
+  sleep "${NORDVPN_HEALTHCHECK_INTERVAL:-300}"
+  if [[ ! $(curl -Is -m 30 -o /dev/null -w "%{http_code}" "${NORDVPN_HEALTHCHECK_URL:-www.google.com}") =~ ^[23] ]]; then
+    nordvpn status
+    s6-svc -wR -t /var/run/s6/services/nordvpn
+    # If no connection, stop container
+    echo "Health check address failed to connect, killing container!"
+    exit 1
+  fi
+done
+
+exit 0
