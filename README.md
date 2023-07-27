@@ -28,23 +28,35 @@ A `.env` file is supplied with the `docker-compose.yml` file for configuration p
 
 #### General config
 `NORDVPN_TOKEN` - Supply your `Access token` to be able to login. If you want to use a file or secret instead, please leave this ENV blank or comment it out.
+
 `NORDVPN_TOKENFILE` - Load the `Access token` from a file mounted in the container. Make sure nothing else but the token is inside. Please leave this blank if you are using `NORDVPN_TOKEN` or comment it out.
+
 `NORDVPN_HEALTHCHECK_INTERVAL` - Set the interval to verify connectivity to the set URL, defaults to 300 (seconds).
+
 `NORDVPN_HEALTHCHECK_URL` - An address to verify if connectivity is available. Choose something depending on what connectivity you want to verify, defaults to www.google.com. Please keep in mind, if the healthcheck fails the container will be killed.
 
 #### Meshnet Permissions
 In this version of NordVPN, permissions must be configured directly on the client. NordVPN currently ALLOWS all peers connected to Meshnet by default. Configuring peer permissions through the NordVPN account website is still in development and not currently available.
+
 This container will run DENY configuration first, followed by ALLOW. ALLOW will overwrite the DENY! Entering a peer in both DENY and ALLOW will first DENY the peer and then overwrite it with an ALLOW.
+
 Peers must be entered with their FQDN/Name assigned by Meshnet, comma separated, example: `peer-atlas.nord,peer-fuji.nord`
 
 `NORDVPN_DENY_PEER_ROUTING` - Block peers from using this node as a router.
+
 `NORDVPN_DENY_PEER_LOCAL` - Block peers from accessing the local network of this node.
+
 `NORDVPN_DENY_PEER_FILESHARE` - Block peers from sharing files with this node.
+
 `NORDVPN_DENY_PEER_REMOTE` - Block peers from remote access to this node.
 
+
 `NORDVPN_ALLOW_PEER_ROUTING` - Allow peers to use this node as a router.
+
 `NORDVPN_ALLOW_PEER_LOCAL` - Allow peers to access the local network of this node (ROUTING permissions required!).
+
 `NORDVPN_ALLOW_PEER_FILESHARE` - Allow peers to  sharing files with this node.
+
 `NORDVPN_ALLOW_PEER_REMOTE` = Allow peers to use remote access on this node.
 
 ### Deployment
