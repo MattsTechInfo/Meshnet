@@ -1,4 +1,10 @@
 # Meshnet
+[![Discord](https://img.shields.io/discord/1013430695860908062?logo=discord&label=Discord&color=7289DA&logoColor=FFFFFF&style=for-the-badge)](https://discord.gg/v8Bwbnb3xe)
+
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/MattsTechInfo/Meshnet?style=for-the-badge)](https://github.com/MattsTechInfo/Meshnet/releases) 
+[![GitHub](https://img.shields.io/github/license/MattsTechInfo/Meshnet?style=for-the-badge)](https://github.com/MattsTechInfo/Meshnet/blob/master/LICENSE) 
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/MattsTechInfo/Meshnet/docker-image.yml?style=for-the-badge)
+
 This (Docker) container provides the official NordVPN client configured for Meshnet VPN usage. Easily deploy fully configurable Meshnet nodes that automatically join your Meshnet network.
 
 > Note: I've created this container for my personal needs, which is to run Meshnet nodes at different locations to be used as outgoing gateways. If you have another use for this container, feel free to let me know or help add functionality if what you are trying to do doesn't work as expected. 
@@ -12,7 +18,7 @@ Deploying this container is quite easy as it does not require specific ports to 
 
 ### Preparations
 A (free) NordVPN is required to enable Meshnet and use the services.
-This container requires an `access token` to log on the NordVPN client. Follow the following steps to generate a new `access token`:
+This container requires an `Access token` to log on the NordVPN client. Follow the following steps to generate a new `Access token`:
 - Login to https://my.nordaccount.com/
 - Scroll down to "NordVPN Meshnet Free"
 - Click "View details"
@@ -27,13 +33,10 @@ This container requires an `access token` to log on the NordVPN client. Follow t
 A `.env` file is supplied with the `docker-compose.yml` file for configuration purposes, this file already contains quite some commentary. A `configMap` will soon be supplied for Kubernetes deployments.
 
 #### General config
-`NORDVPN_TOKEN` - Supply your `Access token` to be able to login. If you want to use a file or secret instead, please leave this ENV blank or comment it out.
-
-`NORDVPN_TOKENFILE` - Load the `Access token` from a file mounted in the container. Make sure nothing else but the token is inside. Please leave this blank if you are using `NORDVPN_TOKEN` or comment it out.
-
-`NORDVPN_HEALTHCHECK_INTERVAL` - Set the interval to verify connectivity to the set URL, defaults to 300 (seconds).
-
-`NORDVPN_HEALTHCHECK_URL` - An address to verify if connectivity is available. Choose something depending on what connectivity you want to verify, defaults to www.google.com. Please keep in mind, if the healthcheck fails the container will be killed.
+- `NORDVPN_TOKEN` - Supply your `Access token` to be able to login. If you want to use a file or secret instead, please leave this ENV blank or comment it out.
+- `NORDVPN_TOKENFILE` - Load the `Access token` from a file mounted in the container. Make sure nothing else but the token is inside. Please leave this blank if you are using `NORDVPN_TOKEN` or comment it out.
+- `NORDVPN_HEALTHCHECK_INTERVAL` - Set the interval to verify connectivity to the set URL, defaults to 300 (seconds).
+- `NORDVPN_HEALTHCHECK_URL` - An address to verify if connectivity is available. Choose something depending on what connectivity you want to verify, defaults to www.google.com. Please keep in mind, if the healthcheck fails the container will be killed.
 
 #### Meshnet Permissions
 In this version of NordVPN, permissions must be configured directly on the client. NordVPN currently ALLOWS all peers connected to Meshnet by default. Configuring peer permissions through the NordVPN account website is still in development and not currently available.
@@ -42,22 +45,16 @@ This container will run DENY configuration first, followed by ALLOW. ALLOW will 
 
 Peers must be entered with their FQDN/Name assigned by Meshnet, comma separated, example: `peer-atlas.nord,peer-fuji.nord`
 
-`NORDVPN_DENY_PEER_ROUTING` - Block peers from using this node as a router.
-
-`NORDVPN_DENY_PEER_LOCAL` - Block peers from accessing the local network of this node.
-
-`NORDVPN_DENY_PEER_FILESHARE` - Block peers from sharing files with this node.
-
-`NORDVPN_DENY_PEER_REMOTE` - Block peers from remote access to this node.
+- `NORDVPN_DENY_PEER_ROUTING` - Block peers from using this node as a router.
+- `NORDVPN_DENY_PEER_LOCAL` - Block peers from accessing the local network of this node.
+- `NORDVPN_DENY_PEER_FILESHARE` - Block peers from sharing files with this node.
+- `NORDVPN_DENY_PEER_REMOTE` - Block peers from remote access to this node.
 
 
-`NORDVPN_ALLOW_PEER_ROUTING` - Allow peers to use this node as a router.
-
-`NORDVPN_ALLOW_PEER_LOCAL` - Allow peers to access the local network of this node (ROUTING permissions required!).
-
-`NORDVPN_ALLOW_PEER_FILESHARE` - Allow peers to  sharing files with this node.
-
-`NORDVPN_ALLOW_PEER_REMOTE` = Allow peers to use remote access on this node.
+- `NORDVPN_ALLOW_PEER_ROUTING` - Allow peers to use this node as a router.
+- `NORDVPN_ALLOW_PEER_LOCAL` - Allow peers to access the local network of this node (ROUTING permissions required!).
+- `NORDVPN_ALLOW_PEER_FILESHARE` - Allow peers to  sharing files with this node.
+- `NORDVPN_ALLOW_PEER_REMOTE` = Allow peers to use remote access on this node.
 
 ### Deployment
 An example `docker-compose.yml` has been supplied to easily deploy the Meshnet node. There is one specific piece of configuration, which is the `hostname`. Without configuring a `hostname`, every restart of the container will show as a new node within the Meshnet. Having a `hostname` configured will make sure the node is remembered/recognized.
