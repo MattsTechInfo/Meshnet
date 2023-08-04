@@ -2,7 +2,7 @@ FROM ghcr.io/linuxserver/baseimage-ubuntu:focal
 LABEL maintainer="Matts Bos - MattsTechInfo"
 
 # Configure the NordVPN client version to install at build
-ARG NORDVPN_CLIENT_VERSION=3.16.3
+ARG NORDVPN_CLIENT_VERSION=3.16.5
 
 # Avoid interactions during build process
 ARG DEBIAN_FRONTEND=noninteractive
