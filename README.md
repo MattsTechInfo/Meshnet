@@ -1,5 +1,5 @@
 # Meshnet
-[![Discord](https://img.shields.io/discord/1013430695860908062?logo=discord&label=Discord&color=7289DA&logoColor=FFFFFF?style=for-the-badge)](https://discord.gg/v8Bwbnb3xe)
+[![Discord](https://img.shields.io/discord/1013430695860908062?logo=discord&label=Discord&color=7289DA&logoColor=FFFFFF&style=for-the-badge)](https://discord.gg/v8Bwbnb3xe)
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/MattsTechInfo/Meshnet?style=for-the-badge)](https://github.com/MattsTechInfo/Meshnet/releases) 
 [![GitHub](https://img.shields.io/github/license/MattsTechInfo/Meshnet?style=for-the-badge)](https://github.com/MattsTechInfo/Meshnet/blob/master/LICENSE) 
