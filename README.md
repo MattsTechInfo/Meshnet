@@ -50,6 +50,7 @@ Peers must be entered with their FQDN/Name assigned by Meshnet, comma separated,
 - `NORDVPN_DENY_PEER_FILESHARE` - Block peers from sharing files with this node.
 - `NORDVPN_DENY_PEER_REMOTE` - Block peers from remote access to this node.
 
+
 - `NORDVPN_ALLOW_PEER_ROUTING` - Allow peers to use this node as a router.
 - `NORDVPN_ALLOW_PEER_LOCAL` - Allow peers to access the local network of this node (ROUTING permissions required!).
 - `NORDVPN_ALLOW_PEER_FILESHARE` - Allow peers to  sharing files with this node.
