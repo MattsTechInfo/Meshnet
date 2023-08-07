@@ -29,6 +29,9 @@ This container requires an `Access token` to log on the NordVPN client. Follow t
 - Press the "Generate new token" button
 - Set the desired time to live
 
+### iptables requirement
+The NordVPN client makes use of iptables to route and block traffic. The underlying host OS need to have iptables libraries installed before this container can enable Meshnet. 
+
 ### Environment variables
 A `.env` file is supplied with the `docker-compose.yml` file for configuration purposes, this file already contains quite some commentary. A `configMap` will soon be supplied for Kubernetes deployments.
 
@@ -56,17 +59,22 @@ Peers must be entered with their FQDN/Name assigned by Meshnet, comma separated,
 - `NORDVPN_ALLOW_PEER_FILESHARE` - Allow peers to  sharing files with this node.
 - `NORDVPN_ALLOW_PEER_REMOTE` = Allow peers to use remote access on this node.
 
-### Deployment
+### Deployment - docker-compose
 An example `docker-compose.yml` has been supplied to easily deploy the Meshnet node. There is one specific piece of configuration, which is the `hostname`. Without configuring a `hostname`, every restart of the container will show as a new node within the Meshnet. Having a `hostname` configured will make sure the node is remembered/recognized.
 
 NordVPN and Meshnet functionality require permissions to create a tunnel interface within the container. The container will require both capabilities `NET_ADMIN` and `NET_RAW`.
 
 Make sure you have the `.env` file next to the `docker-compose.yml` and run `docker-compose up -d` to start the container. The node/peer should show up in your Meshnet within a few seconds.
 
-Kubernetes examples will be supplied later.
+### Deployment - Kubernetes
+Kubernetes examples are supplied to easily deploy the Meshnet node on a Kubernetes cluster. There are two files, `meshnet-deployment.yaml` and `meshnet-env.yaml`. In the `meshnet-deployment.yaml`, please make sure the `hostname` is not empty. Without configuring a `hostname`, every restart of the container will show as a new node within the Meshnet. Having a `hostname` configured will make sure the node is remembered/recognized.
+
+NordVPN and Meshnet functionality require permissions to create a tunnel interface within the container. The container will require both capabilities `NET_ADMIN` and `NET_RAW`.
+
+Make sure you have the `meshnet-env.yaml` file configured and run `kubectl apply -f <meshnet_folder> -n <namespace>` to start the container. The node/peer should show up in your Meshnet within a few seconds.
 
 ## ARM64
-Next to the default AMD64 platform this container is also built for ARM64. This will allow for easy deployment on Ampere based K8s nodes or VM's in, for example, the Free-Tier Oracle Cloud Infrastructure.
+Next to the default AMD64 platform this container is also built for ARM64. This will allow for easy deployment on Ampere based K8s nodes or VM's in, for example, the Free-Tier Oracle Cloud Infrastructure. At this moment, specific OKE images seem to miss the iptables, this is under investigation and can be found in the issues.
 
 ## Credits
 Starting this image has been based on the excellent work of https://github.com/bubuntux/nordvpn with their NordVPN client implementation in Docker.

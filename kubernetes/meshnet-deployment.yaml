@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: meshnet
+  name: meshnet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: meshnet
+  template:
+    metadata:
+      labels:
+        app: meshnet
+    spec:
+      hostname: meshnet
+      containers:
+      - name: meshnet
+        image: ghcr.io/mattstechinfo/meshnet:v1.0.1
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN","NET_RAW"]
+        envFrom:
+          - configMapRef:
+              name: meshnet-env
