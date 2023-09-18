@@ -4,4 +4,5 @@ if [[ ! -d /run/nordvpn ]]; then
   mkdir -m 0770 /run/nordvpn
 fi
 
+exec 2>&1
 exec s6-notifyoncheck -n 60 -d /usr/sbin/nordvpnd > /dev/null
