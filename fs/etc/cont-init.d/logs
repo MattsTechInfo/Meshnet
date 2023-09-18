@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+
+mkdir -p /var/log/nordvpnd
+chown nobody:nogroup /var/log/nordvpnd
