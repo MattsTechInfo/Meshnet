@@ -5,4 +5,4 @@ if [[ ! -d /run/nordvpn ]]; then
 fi
 
 exec 2>&1
-exec s6-notifyoncheck -n 60 -d /usr/sbin/nordvpnd > /dev/null
+exec s6-notifyoncheck -n 60 -d /usr/sbin/nordvpnd
