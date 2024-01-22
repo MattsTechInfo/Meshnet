@@ -5,7 +5,7 @@
 [![GitHub](https://img.shields.io/github/license/MattsTechInfo/Meshnet?style=for-the-badge)](https://github.com/MattsTechInfo/Meshnet/blob/master/LICENSE) 
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/MattsTechInfo/Meshnet/docker-image.yml?style=for-the-badge)
 
-This (Docker) container provides the official NordVPN client configured for Meshnet VPN usage. Easily deploy fully configurable Meshnet nodes that automatically join your Meshnet network.
+This (Docker) container provides the official NordVPN client configured for Meshnet VPN usage. Easily deploy fully configurable Meshnet nodes that automatically join your Meshnet network. This project is in not a supported/official container image by NordVPN and is in no way endorsed by the company NordVPN.
 
 > Note: I've created this container for my personal needs, which is to run Meshnet nodes at different locations to be used as outgoing gateways. If you have another use for this container, feel free to let me know or help add functionality if what you are trying to do doesn't work as expected. 
 
@@ -30,10 +30,10 @@ This container requires an `Access token` to log on the NordVPN client. Follow t
 - Set the desired time to live
 
 ### iptables requirement
-The NordVPN client makes use of iptables to route and block traffic. The underlying host OS need to have iptables libraries installed before this container can enable Meshnet. 
+The NordVPN client makes use of iptables to route and block traffic. The underlying host OS is required to have iptables libraries installed before this container can enable Meshnet. Next to the default iptables functionality, it also requires several iptables modules.
 
 ### Environment variables
-A `.env` file is supplied with the `docker-compose.yml` file for configuration purposes, this file already contains quite some commentary. A `configMap` will soon be supplied for Kubernetes deployments.
+A `.env` file is supplied with the `docker-compose.yml` file for configuration purposes, this file already contains quite some commentary. A `configMap` is supplied for Kubernetes deployments.
 
 #### General config
 - `NORDVPN_TOKEN` - Supply your `Access token` to be able to login. If you want to use a file or secret instead, please leave this ENV blank or comment it out.
@@ -42,7 +42,7 @@ A `.env` file is supplied with the `docker-compose.yml` file for configuration p
 - `NORDVPN_HEALTHCHECK_URL` - An address to verify if connectivity is available. Choose something depending on what connectivity you want to verify, defaults to www.google.com. Please keep in mind, if the healthcheck fails the container will be killed.
 
 #### Meshnet Permissions
-In this version of NordVPN, permissions must be configured directly on the client. NordVPN currently ALLOWS all peers connected to Meshnet by default. Configuring peer permissions through the NordVPN account website is still in development and not currently available.
+In this version of NordVPN, permissions must be configured directly on the client. NordVPN currently ALLOWS all peers connected to Meshnet by default for Fileshare and Remote access services and DENIES Routing and Local network services. Configuring peer permissions through the NordVPN account website is still in development and not currently available.
 
 This container will run DENY configuration first, followed by ALLOW. ALLOW will overwrite the DENY! Entering a peer in both DENY and ALLOW will first DENY the peer and then overwrite it with an ALLOW.
 
@@ -74,7 +74,7 @@ NordVPN and Meshnet functionality require permissions to create a tunnel interfa
 Make sure you have the `meshnet-env.yaml` file configured and run `kubectl apply -f <meshnet_folder> -n <namespace>` to start the container. The node/peer should show up in your Meshnet within a few seconds.
 
 ## ARM64
-Next to the default AMD64 platform this container is also built for ARM64. This will allow for easy deployment on Ampere based K8s nodes or VM's in, for example, the Free-Tier Oracle Cloud Infrastructure. At this moment, specific OKE images seem to miss the iptables, this is under investigation and can be found in the issues.
+Next to the default AMD64 platform this container is also built for ARM64. This will allow for easy deployment on Ampere based K8s nodes or VM's in, for example, the Free-Tier Oracle Cloud Infrastructure. At this moment, specific OKE images seem to miss some iptables modules, running `sudo modprobe iptable_filter` on your worker nodes will fix this.
 
 ## Credits
 Starting this image has been based on the excellent work of https://github.com/bubuntux/nordvpn with their NordVPN client implementation in Docker.
