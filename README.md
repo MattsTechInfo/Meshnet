@@ -38,6 +38,7 @@ A `.env` file is supplied with the `docker-compose.yml` file for configuration p
 #### General config
 - `NORDVPN_TOKEN` - Supply your `Access token` to be able to login. If you want to use a file or secret instead, please leave this ENV blank or comment it out.
 - `NORDVPN_TOKENFILE` - Load the `Access token` from a file mounted in the container. Make sure nothing else but the token is inside. Please leave this blank if you are using `NORDVPN_TOKEN` or comment it out.
+- `NORDVPN_MESHNET_DEBUG` - Enable debug mode, anything non-empty will ENABLE. Use this if you need more verbose error logging for troubleshooting.
 - `NORDVPN_HEALTHCHECK_INTERVAL` - Set the interval to verify connectivity to the set URL, defaults to 300 (seconds).
 - `NORDVPN_HEALTHCHECK_URL` - An address to verify if connectivity is available. Choose something depending on what connectivity you want to verify, defaults to www.google.com. Please keep in mind, if the healthcheck fails the container will be killed.
 
@@ -75,6 +76,9 @@ Make sure you have the `meshnet-env.yaml` file configured and run `kubectl apply
 
 ## ARM64
 Next to the default AMD64 platform this container is also built for ARM64. This will allow for easy deployment on Ampere based K8s nodes or VM's in, for example, the Free-Tier Oracle Cloud Infrastructure. At this moment, specific OKE images seem to miss some iptables modules, running `sudo modprobe iptable_filter` on your worker nodes will fix this.
+
+## Synology
+A few users have had some problems with certain Synology devices as these do not come with the correct iptables modules, a manual will be added to the documentation when I have time to do this. For now, please join the Discord as the solution is posted to the support channel there.
 
 ## Credits
 Starting this image has been based on the excellent work of https://github.com/bubuntux/nordvpn with their NordVPN client implementation in Docker.

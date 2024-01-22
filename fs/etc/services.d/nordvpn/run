@@ -4,4 +4,9 @@ if [[ ! -d /run/nordvpn ]]; then
   mkdir -m 0770 /run/nordvpn
 fi
 
-exec s6-notifyoncheck -n 60 -d /usr/sbin/nordvpnd > /dev/null
+if [[ -n ${NORDVPN_MESHNET_DEBUG} ]]; then
+  exec 2>&1
+  exec s6-notifyoncheck -n 60 -d /usr/sbin/nordvpnd
+else
+  exec s6-notifyoncheck -n 60 -d /usr/sbin/nordvpnd > /dev/null
+fi
