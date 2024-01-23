@@ -11,6 +11,8 @@ data:
   NORDVPN_TOKEN: abcdefgh12345678
   # Load token from file (path to mount location), comment to use token ENV.
   NORDVPN_TOKENFILE: /path/to/tokenfile
+  # Enable debug mode, anything non-empty will ENABLE. Use this if you need more verbose error logging.
+  NORDVPN_MESHNET_DEBUG: ""
   # Healthcheck interval in seconds, default is 300.
   NORDVPN_HEALTHCHECK_INTERVAL: 300
   # Healthcheck URL to verify if connectivity is up. Replace this with something on your Meshnet (if available), defaults to Google.

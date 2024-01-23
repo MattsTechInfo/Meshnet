@@ -17,7 +17,7 @@ spec:
       hostname: meshnet
       containers:
       - name: meshnet
-        image: ghcr.io/mattstechinfo/meshnet:v3.16.5
+        image: ghcr.io/mattstechinfo/meshnet:v3.17.0
         securityContext:
           capabilities:
             add: ["NET_ADMIN","NET_RAW"]
