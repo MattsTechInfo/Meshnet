@@ -10,7 +10,7 @@ This (Docker) container provides the official NordVPN client configured for Mesh
 > Note: I've created this container for my personal needs, which is to run Meshnet nodes at different locations to be used as outgoing gateways. If you have another use for this container, feel free to let me know or help add functionality if what you are trying to do doesn't work as expected. 
 
 ## General Meshnet information
-Meshnet is a free self hosted VPN network connecting multiple nodes together. It's functionality, provided with the NordVPN application, is available on most platforms, including Android/Google TV. This could potentially make for an excellent Netflix password sharing workaround and viewing your own country's content when abroad, but obviously I would never recommend to do anything against the rules now would I.
+Meshnet is a free self hosted VPN network connecting multiple nodes together. It's functionality, provided with the NordVPN application, is available on most platforms, including Android/Google TV. The usecases are extensive, the most popular ones are to access local data/network through Meshnet while having remote clients or setting up an exit node to route all client traffic through a single location.
 Read more about Meshnet over here: https://meshnet.nordvpn.com/
 
 ## Installation and configuration
