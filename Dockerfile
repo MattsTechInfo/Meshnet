@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-ubuntu:jammy-version-d2c25752
+FROM ghcr.io/linuxserver/baseimage-ubuntu:jammy-version-21e99ec9
 LABEL maintainer="Matts Bos - MattsTechInfo"
 
 # Configure the NordVPN client version to install at build
