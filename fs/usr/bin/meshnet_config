@@ -6,6 +6,11 @@ IFS=','
 # Enable Meshnet, this creates the interface and connects
 nordvpn set meshnet on
 
+# Set nickname of this instance on the Meshnet network
+if [[ -n ${NORDVPN_NICKNAME} ]]; then
+  nordvpn meshnet set nickname ${NORDVPN_NICKNAME}
+fi
+
 # Iterate through Meshnet peer permissions
 if [[ -n ${NORDVPN_DENY_PEER_ROUTING} ]]; then
   read -ra deny_routing <<< "${NORDVPN_DENY_PEER_ROUTING}"

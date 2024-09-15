@@ -6,9 +6,7 @@ on:
       - 'fs/**'
       - 'Dockerfile'
     branches:
-      - 'master'
-    tags:
-      - v*
+      - 'dev'
 
 env:
   REGISTRY: ghcr.io
