@@ -1,21 +1,5 @@
 #!/bin/bash
 
-legacy_supported=$(lsmod | grep ip_tables >/dev/null 2>&1 && echo yes || echo no)
-nft_supported=$(lsmod | grep nf_tables >/dev/null 2>&1 && echo yes || echo no)
-if [ x$IPTABLES = xlegacy ] ; then
-	if [ x$legacy_supported = xyes ] ; then
-		update-alternatives --set iptables /usr/sbin/iptables-legacy
-	else
-		update-alternatives --set iptables /usr/sbin/iptables-nft
-	fi
-else
-	if [ x$nft_supported = xyes ] ; then
-		update-alternatives --set iptables /usr/sbin/iptables-nft
-	else
-		update-alternatives --set iptables /usr/sbin/iptables-legacy
-	fi
-fi
-
 if [[ ! -d /run/nordvpn ]]; then
   mkdir -m 0770 /run/nordvpn
 fi
