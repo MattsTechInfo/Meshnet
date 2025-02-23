@@ -12,6 +12,7 @@ RUN echo "**** Get NordVPN Repo ****" && \
     curl https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/n/nordvpn-release/nordvpn-release_1.0.0_all.deb --output /tmp/nordvpnrepo.deb && \
     apt-get install -y /tmp/nordvpnrepo.deb && \
     apt-get update -y && \
+    apt-get install -qy kmod && \
     echo "**** Install NordVPN client ****" && \
     apt-get install -y nordvpn${NORDVPN_CLIENT_VERSION:+=$NORDVPN_CLIENT_VERSION} && \
     echo "**** Cleanup ****" && \
