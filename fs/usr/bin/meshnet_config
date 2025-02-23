@@ -11,6 +11,11 @@ if [[ -n ${NORDVPN_NICKNAME} ]]; then
   nordvpn meshnet set nickname ${NORDVPN_NICKNAME}
 fi
 
+# Enable the new NordWhisper protocol if requested, not yet supported.
+#if [[ -n ${NORDVPN_WHISPER} ]]; then
+#  nordvpn set technology nordwhisper
+#fi
+
 # Iterate through Meshnet peer permissions
 if [[ -n ${NORDVPN_DENY_PEER_ROUTING} ]]; then
   read -ra deny_routing <<< "${NORDVPN_DENY_PEER_ROUTING}"
