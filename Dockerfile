@@ -23,13 +23,14 @@ RUN echo "**** Get NordVPN Repo ****" && \
 		/var/cache/apt/archives/* \
 		/var/lib/apt/lists/* \
 		/var/tmp/* && \
-    echo "**** Finished software setup ****" && \
-    chmod a+x /etc/cont-init.d/perms && \
-    chmod a+x /etc/cont-init.d/tun-if && \
-    echo "**** Finished setting execute permissions ****"
+    echo "**** Finished software setup ****"
 
 # Copy all the files we need in the container
 COPY /fs /
+
+RUN chmod a+x /etc/cont-init.d/perms && \
+    chmod a+x /etc/cont-init.d/tun-if && \
+    echo "**** Finished setting execute permissions ****"
 
 # Make sure NordVPN service is running before logging in and launching Meshnet
 ENV S6_CMD_WAIT_FOR_SERVICES=1
