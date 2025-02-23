@@ -23,7 +23,10 @@ RUN echo "**** Get NordVPN Repo ****" && \
 		/var/cache/apt/archives/* \
 		/var/lib/apt/lists/* \
 		/var/tmp/* && \
-    echo "**** Finished software setup ****"
+    echo "**** Finished software setup ****" \
+    chmod a+x /etc/cont-init.d/perms \
+    chmod a+x /etc/cont-init.d/tun-if \
+    echo "**** Finished setting execute permissions ****"
 
 # Copy all the files we need in the container
 COPY /fs /
